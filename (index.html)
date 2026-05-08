@@ -39,7 +39,6 @@ cat > index.html << 'EOF'
             text-decoration: none;
             font-weight: 500;
             margin-left: 1.5rem;
-            transition: color 0.2s;
         }
         .nav-links a:hover { color: #8a9fd8; }
         .grid {
@@ -53,12 +52,9 @@ cat > index.html << 'EOF'
             border-radius: 24px;
             padding: 1.6rem;
             border: 1px solid #323d52;
-            transition: transform 0.2s, border-color 0.2s;
+            transition: transform 0.2s;
         }
-        .card:hover {
-            border-color: #6a7f9e;
-            transform: translateY(-3px);
-        }
+        .card:hover { transform: translateY(-3px); border-color: #6a7f9e; }
         .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
         .card-header span { font-size: 1.8rem; }
         .card-header h3 { font-size: 1.3rem; font-weight: 600; color: #eef3ff; }
@@ -71,7 +67,6 @@ cat > index.html << 'EOF'
             word-break: break-all;
             margin: 1rem 0;
             border: 1px solid #384257;
-            color: #cdd9ff;
         }
         .btn {
             background: #2f3b4e;
@@ -81,29 +76,17 @@ cat > index.html << 'EOF'
             border-radius: 40px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             font-size: 0.85rem;
         }
-        .btn-primary { background: #4f6b8f; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-        .btn-primary:hover { background: #3e5575; transform: scale(0.98); }
+        .btn-primary { background: #4f6b8f; }
+        .btn-primary:hover { background: #3e5575; }
         .btn-outline { background: transparent; border: 1px solid #6a7f9e; }
-        .btn-outline:hover { background: #2f3b4e; }
-        .status-badge {
-            display: inline-block;
-            background: #2e4a3a;
-            color: #a3e0c0;
-            padding: 0.25rem 0.75rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
         input {
             background: #12161f;
             border: 1px solid #384257;
             border-radius: 40px;
             padding: 0.6rem 1rem;
             color: #eef3ff;
-            font-size: 0.9rem;
         }
         .footer {
             text-align: center;
@@ -113,7 +96,6 @@ cat > index.html << 'EOF'
             font-size: 0.8rem;
             color: #7e8aa3;
         }
-        @media (max-width: 640px) { body { padding: 1rem; } .header { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
@@ -131,7 +113,7 @@ cat > index.html << 'EOF'
     <div class="grid">
         <div class="card">
             <div class="card-header"><span>📡</span><h3>Transfer Status</h3></div>
-            <div id="transfer-stats"><p style="color:#a7b3cc;">Loading...</p></div>
+            <div id="transfer-stats"><p>Loading...</p></div>
             <div class="address-box" id="addressDisplay">bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy</div>
             <div style="display: flex; gap: 12px;">
                 <button class="btn btn-primary" id="refreshBtn">⟳ Refresh</button>
@@ -140,10 +122,10 @@ cat > index.html << 'EOF'
         </div>
         <div class="card">
             <div class="card-header"><span>🏦</span><h3>THB Conversion</h3></div>
-            <p style="margin-bottom: 12px;">Real-time crypto/THB rate</p>
+            <p>Real-time crypto/THB rate</p>
             <div id="thbDisplay"><span>฿ <strong id="estimatedThb">0.00</strong> THB</span> <span style="margin-left: 20px;">📈 <span id="cryptoRate">0</span> THB/coin</span></div>
             <div style="margin-top: 18px;">
-                <label for="thbAmount" style="font-size:0.8rem;">Generate bank QR:</label>
+                <label>Generate bank QR:</label>
                 <div style="display: flex; gap: 8px; margin-top: 6px;">
                     <input type="number" id="thbAmount" placeholder="Amount in THB">
                     <button class="btn btn-primary" id="qrBtn">QR Code</button>
@@ -153,7 +135,7 @@ cat > index.html << 'EOF'
         <div class="card">
             <div class="card-header"><span>⚙️</span><h3>Quick Install</h3></div>
             <p>One‑line command for Termux:</p>
-            <div class="address-box" style="font-size:0.7rem; user-select:all;">curl -sL https://git.io/JLkLv | bash</div>
+            <div class="address-box" style="font-size:0.7rem;">curl -sL https://git.io/JLkLv | bash</div>
             <button class="btn btn-outline" id="copyCmdBtn">Copy command</button>
         </div>
     </div>
@@ -163,17 +145,16 @@ cat > index.html << 'EOF'
 </div>
 <script>
     const ADDR = "bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy";
-    async function fetchJSON(url) { try { const res = await fetch(url); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return null; } }
     async function update() {
-        document.getElementById("addressDisplay").innerText = ADDR;
         const balanceSat = await fetch(`https://blockchain.info/q/addressbalance/${ADDR}`).then(r=>r.text()).catch(()=>"0");
         const btcBal = parseFloat(balanceSat) / 1e8;
-        const priceData = await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=thb");
+        const priceRes = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=thb");
+        const priceData = await priceRes.json();
         const btcThb = priceData?.bitcoin?.thb || 1800000;
         const thbValue = (btcBal * btcThb).toFixed(2);
         document.getElementById("estimatedThb").innerText = thbValue;
         document.getElementById("cryptoRate").innerText = btcThb.toLocaleString();
-        document.getElementById("transfer-stats").innerHTML = `<p>✅ Estimated balance: <strong>${btcBal.toFixed(8)} BTC</strong></p><p>🔗 Connected to pool · active</p>`;
+        document.getElementById("transfer-stats").innerHTML = `<p>✅ Estimated balance: <strong>${btcBal.toFixed(8)} BTC</strong></p><p>🔗 Connected to pool</p>`;
     }
     function promptpayQR(amount) { return `https://quickchart.io/qr?text=PromptPay|0812345678|${amount}&size=200`; }
     document.getElementById("refreshBtn").onclick = () => update();

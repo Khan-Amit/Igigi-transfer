@@ -1,20 +1,27 @@
+cat > README.md << 'EOF'
 # 🚛 Igigi-transfer
 
-**Crypto to Thai Baht — Direct to your bank via QR**
+**Bitcoin mining & transfer tool for Termux (Android)**
 
-## Features
+Mine Bitcoin using the Enigma algorithm. Convert to Thai Baht. Send to bank via QR.
 
-- 🚛 Bitcoin → Thai Baht → Bank QR
-- 🚚 Send/Receive crypto
-- 🧾 Generate payment QR for buyers
-- 📊 Live crypto prices
+---
 
-## Install on Termux
+## ✨ Features
+
+- ⛏️ **Mine Bitcoin** on Android phone or laptop
+- 📊 **Real-time estimates** (shares, Satoshis, THB)
+- 🏧 **Bank QR generator** — scan with banking app
+- 🔒 **Your keys, your coins** — real BTC address
+- 📦 **Lightweight** — runs on $200 phones
+
+---
+
+## 📱 Installation (Termux)
 
 ```bash
 pkg update && pkg upgrade -y
 pkg install bc curl jq qrencode termux-api -y
 git clone https://github.com/Khan-Amit/Igigi-transfer.git
 cd Igigi-transfer
-chmod +x igigi-transfer.sh pool_miner.sh
-./igigi-transfer.sh
+chmod +x *.sh

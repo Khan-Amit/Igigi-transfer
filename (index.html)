@@ -6,27 +6,15 @@ cat > index.html << 'EOF'
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igigi-transfer | Crypto Transfer Protocol</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #1a1e26;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
             color: #e5e9f0;
             line-height: 1.5;
             padding: 2rem;
         }
-
-        /* Steel Gray accents */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Header */
+        .container { max-width: 1200px; margin: 0 auto; }
         .header {
             display: flex;
             justify-content: space-between;
@@ -37,7 +25,6 @@ cat > index.html << 'EOF'
             padding-bottom: 1rem;
             border-bottom: 2px solid #2d3548;
         }
-
         .logo h1 {
             font-size: 2rem;
             font-weight: 700;
@@ -45,14 +32,8 @@ cat > index.html << 'EOF'
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
         }
-
-        .logo p {
-            color: #8e9bb0;
-            font-size: 0.85rem;
-        }
-
+        .logo p { color: #8e9bb0; font-size: 0.85rem; }
         .nav-links a {
             color: #b9c7dd;
             text-decoration: none;
@@ -60,19 +41,13 @@ cat > index.html << 'EOF'
             margin-left: 1.5rem;
             transition: color 0.2s;
         }
-
-        .nav-links a:hover {
-            color: #8a9fd8;
-        }
-
-        /* Cards */
+        .nav-links a:hover { color: #8a9fd8; }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.8rem;
             margin-bottom: 2rem;
         }
-
         .card {
             background: #242a36;
             border-radius: 24px;
@@ -80,29 +55,13 @@ cat > index.html << 'EOF'
             border: 1px solid #323d52;
             transition: transform 0.2s, border-color 0.2s;
         }
-
         .card:hover {
             border-color: #6a7f9e;
             transform: translateY(-3px);
         }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .card-header span {
-            font-size: 1.8rem;
-        }
-
-        .card-header h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #eef3ff;
-        }
-
+        .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.2rem; }
+        .card-header span { font-size: 1.8rem; }
+        .card-header h3 { font-size: 1.3rem; font-weight: 600; color: #eef3ff; }
         .address-box {
             background: #12161f;
             padding: 0.8rem;
@@ -114,8 +73,6 @@ cat > index.html << 'EOF'
             border: 1px solid #384257;
             color: #cdd9ff;
         }
-
-        /* Buttons */
         .btn {
             background: #2f3b4e;
             border: none;
@@ -127,26 +84,10 @@ cat > index.html << 'EOF'
             transition: all 0.2s;
             font-size: 0.85rem;
         }
-
-        .btn-primary {
-            background: #4f6b8f;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .btn-primary:hover {
-            background: #3e5575;
-            transform: scale(0.98);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #6a7f9e;
-        }
-
-        .btn-outline:hover {
-            background: #2f3b4e;
-        }
-
+        .btn-primary { background: #4f6b8f; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        .btn-primary:hover { background: #3e5575; transform: scale(0.98); }
+        .btn-outline { background: transparent; border: 1px solid #6a7f9e; }
+        .btn-outline:hover { background: #2f3b4e; }
         .status-badge {
             display: inline-block;
             background: #2e4a3a;
@@ -156,7 +97,6 @@ cat > index.html << 'EOF'
             font-size: 0.75rem;
             font-weight: 500;
         }
-
         input {
             background: #12161f;
             border: 1px solid #384257;
@@ -165,7 +105,6 @@ cat > index.html << 'EOF'
             color: #eef3ff;
             font-size: 0.9rem;
         }
-
         .footer {
             text-align: center;
             margin-top: 3rem;
@@ -174,11 +113,7 @@ cat > index.html << 'EOF'
             font-size: 0.8rem;
             color: #7e8aa3;
         }
-
-        @media (max-width: 640px) {
-            body { padding: 1rem; }
-            .header { flex-direction: column; text-align: center; }
-        }
+        @media (max-width: 640px) { body { padding: 1rem; } .header { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
@@ -193,7 +128,6 @@ cat > index.html << 'EOF'
             <a href="https://github.com/Khan-Amit/Igigi-transfer" target="_blank">GitHub</a>
         </div>
     </div>
-
     <div class="grid">
         <div class="card">
             <div class="card-header"><span>📡</span><h3>Transfer Status</h3></div>
@@ -204,7 +138,6 @@ cat > index.html << 'EOF'
                 <button class="btn btn-outline" id="copyAddrBtn">📋 Copy Address</button>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header"><span>🏦</span><h3>THB Conversion</h3></div>
             <p style="margin-bottom: 12px;">Real-time crypto/THB rate</p>
@@ -217,7 +150,6 @@ cat > index.html << 'EOF'
                 </div>
             </div>
         </div>
-
         <div class="card">
             <div class="card-header"><span>⚙️</span><h3>Quick Install</h3></div>
             <p>One‑line command for Termux:</p>
@@ -225,42 +157,25 @@ cat > index.html << 'EOF'
             <button class="btn btn-outline" id="copyCmdBtn">Copy command</button>
         </div>
     </div>
-
     <div class="footer">
         <p>Igigi-transfer — Crypto transfer protocol | <a href="https://github.com/Khan-Amit/Igigi-transfer" style="color:#8a9fd8;">GitHub</a> | MIT License</p>
     </div>
 </div>
-
 <script>
     const ADDR = "bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy";
-
-    async function fetchJSON(url) {
-        try {
-            const res = await fetch(url);
-            if (!res.ok) throw new Error();
-            return await res.json();
-        } catch(e) { return null; }
-    }
-
+    async function fetchJSON(url) { try { const res = await fetch(url); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return null; } }
     async function update() {
         document.getElementById("addressDisplay").innerText = ADDR;
-
         const balanceSat = await fetch(`https://blockchain.info/q/addressbalance/${ADDR}`).then(r=>r.text()).catch(()=>"0");
         const btcBal = parseFloat(balanceSat) / 1e8;
-
         const priceData = await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=thb");
         const btcThb = priceData?.bitcoin?.thb || 1800000;
-
         const thbValue = (btcBal * btcThb).toFixed(2);
         document.getElementById("estimatedThb").innerText = thbValue;
         document.getElementById("cryptoRate").innerText = btcThb.toLocaleString();
         document.getElementById("transfer-stats").innerHTML = `<p>✅ Estimated balance: <strong>${btcBal.toFixed(8)} BTC</strong></p><p>🔗 Connected to pool · active</p>`;
     }
-
-    function promptpayQR(amount) {
-        return `https://quickchart.io/qr?text=PromptPay|0812345678|${amount}&size=200`;
-    }
-
+    function promptpayQR(amount) { return `https://quickchart.io/qr?text=PromptPay|0812345678|${amount}&size=200`; }
     document.getElementById("refreshBtn").onclick = () => update();
     document.getElementById("copyAddrBtn").onclick = () => { navigator.clipboard.writeText(ADDR); alert("Address copied"); };
     document.getElementById("copyCmdBtn").onclick = () => { navigator.clipboard.writeText("curl -sL https://git.io/JLkLv | bash"); alert("Command copied"); };
@@ -270,7 +185,6 @@ cat > index.html << 'EOF'
         let win = window.open();
         win.document.write(`<img src="${promptpayQR(amt)}" style="max-width:300px;"><p>Scan with banking app to pay ${amt} THB</p>`);
     };
-
     update();
     setInterval(update, 60000);
 </script>

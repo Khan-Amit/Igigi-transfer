@@ -1,9 +1,9 @@
 cat > README.md << 'EOF'
 # 🚛 Igigi-transfer
 
-**Bitcoin mining & transfer tool for Termux (Android)**
+*transfer tool for Termux (Android)*
 
-Mine Bitcoin using the Enigma algorithm. Convert to Thai Baht. Send to bank via QR.
+Mine crypto using the Enigma algorithm. Convert to Thai Baht. Send to bank via QR.
 
 ---
 

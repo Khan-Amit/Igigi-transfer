@@ -3,19 +3,30 @@ cat > index.html << 'EOF'
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Igigi-transfer | Crypto Transfer Protocol</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0e17 0%, #0f1622 100%);
-            color: #eef2ff;
-            line-height: 1.5;
-            min-height: 100vh;
-            padding: 1.5rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 1200px; margin: 0 auto; }
+
+        body {
+            background: #1a1e26;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #e5e9f0;
+            line-height: 1.5;
+            padding: 2rem;
+        }
+
+        /* Steel Gray accents */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -24,50 +35,89 @@ cat > index.html << 'EOF'
             gap: 1rem;
             margin-bottom: 3rem;
             padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 2px solid #2d3548;
         }
+
         .logo h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #fff, #5b8cff);
+            background: linear-gradient(135deg, #bcc9e6, #6e7f9e);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -0.5px;
         }
-        .logo p { font-size: 0.85rem; color: #8d9bb0; }
-        .nav-links { display: flex; gap: 1.5rem; }
-        .nav-links a { color: #b9c3d4; text-decoration: none; font-weight: 500; transition: color 0.2s; }
-        .nav-links a:hover { color: #5b8cff; }
-        .grid-2 {
+
+        .logo p {
+            color: #8e9bb0;
+            font-size: 0.85rem;
+        }
+
+        .nav-links a {
+            color: #b9c7dd;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 1.5rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #8a9fd8;
+        }
+
+        /* Cards */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
             margin-bottom: 2rem;
         }
+
         .card {
-            background: rgba(18, 25, 40, 0.6);
-            backdrop-filter: blur(10px);
+            background: #242a36;
             border-radius: 24px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.08);
+            padding: 1.6rem;
+            border: 1px solid #323d52;
             transition: transform 0.2s, border-color 0.2s;
         }
-        .card:hover { border-color: rgba(91, 140, 255, 0.4); transform: translateY(-2px); }
-        .card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
-        .card-header span { font-size: 1.8rem; }
-        .card-header h3 { font-size: 1.3rem; font-weight: 600; }
+
+        .card:hover {
+            border-color: #6a7f9e;
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-header span {
+            font-size: 1.8rem;
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #eef3ff;
+        }
+
         .address-box {
-            background: #0b1018;
-            padding: 0.75rem;
+            background: #12161f;
+            padding: 0.8rem;
             border-radius: 16px;
             font-family: monospace;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             word-break: break-all;
             margin: 1rem 0;
-            border: 1px solid #253049;
+            border: 1px solid #384257;
+            color: #cdd9ff;
         }
+
+        /* Buttons */
         .btn {
-            background: #1e2a44;
+            background: #2f3b4e;
             border: none;
             color: white;
             padding: 0.6rem 1.2rem;
@@ -75,37 +125,68 @@ cat > index.html << 'EOF'
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
-        .btn-primary { background: #5b8cff; box-shadow: 0 4px 12px rgba(91,140,255,0.2); }
-        .btn-primary:hover { background: #3b6eff; transform: scale(0.98); }
-        .btn-outline { background: transparent; border: 1px solid #5b8cff; }
+
+        .btn-primary {
+            background: #4f6b8f;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            background: #3e5575;
+            transform: scale(0.98);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #6a7f9e;
+        }
+
+        .btn-outline:hover {
+            background: #2f3b4e;
+        }
+
         .status-badge {
             display: inline-block;
-            background: #10b98120;
-            color: #34d399;
+            background: #2e4a3a;
+            color: #a3e0c0;
             padding: 0.25rem 0.75rem;
             border-radius: 40px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
         }
+
+        input {
+            background: #12161f;
+            border: 1px solid #384257;
+            border-radius: 40px;
+            padding: 0.6rem 1rem;
+            color: #eef3ff;
+            font-size: 0.9rem;
+        }
+
         .footer {
             text-align: center;
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid #2d3548;
             font-size: 0.8rem;
-            color: #6a7890;
+            color: #7e8aa3;
         }
-        @media (max-width: 640px) { body { padding: 1rem; } .header { flex-direction: column; text-align: center; } }
+
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .header { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
         <div class="logo">
-            <h1>⚡ IGIGI-TRANSFER</h1>
-            <p>Crypto Transfer Protocol · Real-time · THB Settlements</p>
+            <h1>⚙️ IGIGI-TRANSFER</h1>
+            <p>Crypto Transfer Protocol · THB settlements</p>
         </div>
         <div class="nav-links">
             <a href="#">Dashboard</a>
@@ -113,69 +194,85 @@ cat > index.html << 'EOF'
         </div>
     </div>
 
-    <div class="grid-2">
+    <div class="grid">
         <div class="card">
-            <div class="card-header"><span>📊</span><h3>Transfer Status</h3></div>
-            <div id="mining-stats"><p style="color:#b9c3d4;">Loading...</p></div>
+            <div class="card-header"><span>📡</span><h3>Transfer Status</h3></div>
+            <div id="transfer-stats"><p style="color:#a7b3cc;">Loading...</p></div>
             <div class="address-box" id="addressDisplay">bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy</div>
-            <div style="display: flex; gap: 12px; margin-top: 12px;">
-                <button class="btn btn-primary" id="refreshBalanceBtn">⟳ Refresh</button>
-                <button class="btn btn-outline" id="copyAddressBtn">📋 Copy Address</button>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-primary" id="refreshBtn">⟳ Refresh</button>
+                <button class="btn btn-outline" id="copyAddrBtn">📋 Copy Address</button>
             </div>
         </div>
+
         <div class="card">
             <div class="card-header"><span>🏦</span><h3>THB Conversion</h3></div>
-            <p style="margin-bottom: 12px;">Real-time rate & estimated value.</p>
-            <div id="thb-stats"><span>฿ <strong id="estimatedThb">0.00</strong> THB</span> <span style="margin-left: 20px;">📈 <span id="btcRate">0</span> THB/BTC</span></div>
+            <p style="margin-bottom: 12px;">Real-time crypto/THB rate</p>
+            <div id="thbDisplay"><span>฿ <strong id="estimatedThb">0.00</strong> THB</span> <span style="margin-left: 20px;">📈 <span id="cryptoRate">0</span> THB/coin</span></div>
             <div style="margin-top: 18px;">
-                <label for="thbAmount" style="font-size:0.8rem;">Generate QR for bank transfer:</label>
+                <label for="thbAmount" style="font-size:0.8rem;">Generate bank QR:</label>
                 <div style="display: flex; gap: 8px; margin-top: 6px;">
-                    <input type="number" id="thbAmount" placeholder="Amount in THB" style="flex:1; background:#0f1622; border:1px solid #2a3a60; border-radius: 40px; padding: 8px 16px; color: white;">
-                    <button class="btn btn-primary" id="generateQrBtn">QR Code</button>
+                    <input type="number" id="thbAmount" placeholder="Amount in THB">
+                    <button class="btn btn-primary" id="qrBtn">QR Code</button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="grid-2">
         <div class="card">
-            <div class="card-header"><span>⚙️</span><h3>Termux Quick Install</h3></div>
-            <p>One‑line command for your mobile terminal:</p>
-            <div class="address-box" style="font-size:0.75rem; user-select: all;">curl -sL https://git.io/JLkLv | bash</div>
-            <button class="btn btn-outline" id="copyInstallCmd" style="margin-top: 12px;">Copy command</button>
-        </div>
-        <div class="card">
-            <div class="card-header"><span>🛡️</span><h3>Secure & Compliant</h3></div>
-            <p>Anonymous hashing · No personal data stored · Works with major Thai banks via PromptPay QR.</p>
-            <span class="status-badge">🟢 Network active</span>
+            <div class="card-header"><span>⚙️</span><h3>Quick Install</h3></div>
+            <p>One‑line command for Termux:</p>
+            <div class="address-box" style="font-size:0.7rem; user-select:all;">curl -sL https://git.io/JLkLv | bash</div>
+            <button class="btn btn-outline" id="copyCmdBtn">Copy command</button>
         </div>
     </div>
 
     <div class="footer">
-        <p>Igigi-transfer — Crypto transfer protocol | <a href="https://github.com/Khan-Amit/Igigi-transfer" style="color:#5b8cff;">GitHub Repository</a> | MIT License</p>
+        <p>Igigi-transfer — Crypto transfer protocol | <a href="https://github.com/Khan-Amit/Igigi-transfer" style="color:#8a9fd8;">GitHub</a> | MIT License</p>
     </div>
 </div>
+
 <script>
-    const BTC_ADDRESS = "bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy";
-    async function fetchJSON(url) { try { const res = await fetch(url); if (!res.ok) throw new Error(); return await res.json(); } catch(e) { return null; } }
-    async function updateDashboard() {
-        document.getElementById("addressDisplay").innerText = BTC_ADDRESS;
-        const balanceSat = await fetch(`https://blockchain.info/q/addressbalance/${BTC_ADDRESS}`).then(r=>r.text()).catch(()=>"0");
-        const btcBalance = parseFloat(balanceSat) / 1e8;
+    const ADDR = "bc1qk7ajtrgplvn25600wm7gx9u5c5nk8kz9dfpcqy";
+
+    async function fetchJSON(url) {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) throw new Error();
+            return await res.json();
+        } catch(e) { return null; }
+    }
+
+    async function update() {
+        document.getElementById("addressDisplay").innerText = ADDR;
+
+        const balanceSat = await fetch(`https://blockchain.info/q/addressbalance/${ADDR}`).then(r=>r.text()).catch(()=>"0");
+        const btcBal = parseFloat(balanceSat) / 1e8;
+
         const priceData = await fetchJSON("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=thb");
         const btcThb = priceData?.bitcoin?.thb || 1800000;
-        const estimatedThb = (btcBalance * btcThb).toFixed(2);
-        document.getElementById("estimatedThb").innerText = estimatedThb;
-        document.getElementById("btcRate").innerText = btcThb.toLocaleString();
-        document.getElementById("mining-stats").innerHTML = `<p>✅ Estimated balance: <strong>${btcBalance.toFixed(8)} BTC</strong></p><p>⛏️ Connected to pool · Last active: now</p>`;
+
+        const thbValue = (btcBal * btcThb).toFixed(2);
+        document.getElementById("estimatedThb").innerText = thbValue;
+        document.getElementById("cryptoRate").innerText = btcThb.toLocaleString();
+        document.getElementById("transfer-stats").innerHTML = `<p>✅ Estimated balance: <strong>${btcBal.toFixed(8)} BTC</strong></p><p>🔗 Connected to pool · active</p>`;
     }
-    function generatePromptPayQR(amountThb) { return `https://quickchart.io/qr?text=PromptPay|0812345678|${amountThb}&size=200`; }
-    document.getElementById("refreshBalanceBtn").onclick = () => updateDashboard();
-    document.getElementById("copyAddressBtn").onclick = () => { navigator.clipboard.writeText(BTC_ADDRESS); alert("Address copied!"); };
-    document.getElementById("copyInstallCmd").onclick = () => { navigator.clipboard.writeText("curl -sL https://git.io/JLkLv | bash"); alert("Command copied!"); };
-    document.getElementById("generateQrBtn").onclick = () => { const amt = parseFloat(document.getElementById("thbAmount").value); if (isNaN(amt) || amt <= 0) { alert("Enter valid THB amount"); return; } const win = window.open(); win.document.write(`<img src="${generatePromptPayQR(amt)}" style="max-width:300px;"><p>Scan with banking app to pay ${amt} THB</p>`); };
-    updateDashboard();
-    setInterval(updateDashboard, 60000);
+
+    function promptpayQR(amount) {
+        return `https://quickchart.io/qr?text=PromptPay|0812345678|${amount}&size=200`;
+    }
+
+    document.getElementById("refreshBtn").onclick = () => update();
+    document.getElementById("copyAddrBtn").onclick = () => { navigator.clipboard.writeText(ADDR); alert("Address copied"); };
+    document.getElementById("copyCmdBtn").onclick = () => { navigator.clipboard.writeText("curl -sL https://git.io/JLkLv | bash"); alert("Command copied"); };
+    document.getElementById("qrBtn").onclick = () => {
+        let amt = parseFloat(document.getElementById("thbAmount").value);
+        if (isNaN(amt) || amt <= 0) { alert("Enter valid THB amount"); return; }
+        let win = window.open();
+        win.document.write(`<img src="${promptpayQR(amt)}" style="max-width:300px;"><p>Scan with banking app to pay ${amt} THB</p>`);
+    };
+
+    update();
+    setInterval(update, 60000);
 </script>
 </body>
 </html>
